@@ -116,6 +116,13 @@ public class MainActivity extends Activity {
         });
         button(root, "DÉCONNECTER", () -> disconnect());
         setContentView(scroll);
+        getWindow().getDecorView().setOnCapturedPointerListener((v, e) -> {
+            if (!remote) return false;
+            if (e.getAction() == MotionEvent.ACTION_MOVE) {
+                sendMove(Math.round(e.getX()), Math.round(e.getY())); return true;
+            }
+            return false;
+        });
     }
 
     private TextView addLabel(LinearLayout root, String value, int size) {
@@ -220,13 +227,6 @@ public class MainActivity extends Activity {
         return super.onGenericMotionEvent(e);
     }
     @Override public void onPointerCaptureChanged(boolean captured) { super.onPointerCaptureChanged(captured); }
-    @Override public boolean onCapturedPointerEvent(MotionEvent e) {
-        if (!remote) return false;
-        if (e.getAction() == MotionEvent.ACTION_MOVE) {
-            sendMove(Math.round(e.getX()), Math.round(e.getY())); return true;
-        }
-        return super.onCapturedPointerEvent(e);
-    }
     @Override protected void onActivityResult(int request, int result, Intent data) {
         super.onActivityResult(request, result, data);
         if (request == 1 && result == RESULT_OK && data != null) {
