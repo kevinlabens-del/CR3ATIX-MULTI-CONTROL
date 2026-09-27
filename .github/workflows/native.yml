@@ -61,5 +61,5 @@ jobs:
           if gh release view v0.1.0-alpha >/dev/null 2>&1; then
             gh release upload v0.1.0-alpha release/*.apk release/*.exe --clobber
           else
-            gh release create v0.1.0-alpha release/*.apk release/*.exe --target "$GITHUB_SHA" --prerelease --title "0.1.0 alpha · essai Android → Windows" --notes "Essai technique Android vers Windows uniquement. Ce n'est pas la V1 multi-appareils ni FOLLOW matériel. Voir docs/INSTALLATION.md et docs/VALIDATION.md avant installation."
+            gh release create v0.1.0-alpha release/*.apk release/*.exe --target "$GITHUB_SHA" --prerelease --title "0.1.0 alpha · essai Android → Windows" --notes "Essai technique Android vers Windows ou Android avec Receiver expérimental. Ce n'est pas la V1 multi-appareils ni FOLLOW matériel. Voir docs/INSTALLATION.md et docs/VALIDATION.md avant installation."
           fi
