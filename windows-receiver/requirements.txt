@@ -1,0 +1,3 @@
+cryptography>=43,<47
+pyautogui>=0.9.54,<1
+pyinstaller>=6,<7

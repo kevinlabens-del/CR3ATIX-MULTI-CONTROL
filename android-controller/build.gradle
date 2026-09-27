@@ -1,0 +1,4 @@
+plugins { id 'com.android.application' }
+android { namespace 'fr.creatix.multicontrol'; compileSdk 35
+    defaultConfig { applicationId 'fr.creatix.multicontrol'; minSdk 26; targetSdk 28; versionCode 1; versionName '0.1.0' }
+}
