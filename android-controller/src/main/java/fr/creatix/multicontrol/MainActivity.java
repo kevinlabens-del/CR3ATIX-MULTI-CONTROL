@@ -54,7 +54,16 @@ public class MainActivity extends Activity {
         root.setBackgroundColor(Color.rgb(11, 17, 30));
         scroll.addView(root);
         addLabel(root, "CR3@TIX MULTI CONTROL", 25);
-        addLabel(root, "Receiver Windows · même réseau Wi-Fi · TLS avec empreinte vérifiée", 13);
+        addLabel(root, "Android et Windows · même réseau Wi-Fi · TLS avec empreinte vérifiée", 13);
+        addLabel(root, "RECEIVER ANDROID · à activer sur l'appareil à contrôler", 16);
+        TextView receiverInfo = addLabel(root, "Receiver arrêté", 13);
+        button(root, "ACTIVER RECEIVER", () -> {
+            startService(new Intent(this, AndroidReceiverService.class));
+            receiverInfo.postDelayed(() -> receiverInfo.setText("Code : " + AndroidReceiverService.pin + "\nEmpreinte TLS : " + AndroidReceiverService.fingerprint + "\n" + AndroidReceiverService.error), 1600);
+        });
+        button(root, "AUTORISER GESTES ANDROID", () -> startActivity(new Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS)));
+        button(root, "ARRÊTER RECEIVER", () -> { stopService(new Intent(this, AndroidReceiverService.class)); receiverInfo.setText("Receiver arrêté"); });
+        addLabel(root, "Sur Android, les gestes commandent le toucher à distance ; ils ne déplacent pas le curseur système.", 12);
         host = field(root, "IP locale du PC (ex. 192.168.1.42)", "host");
         pin = field(root, "Code temporaire affiché sur le PC", "pin");
         fingerprint = field(root, "Empreinte SHA-256 affichée sur le PC (64 caractères)", "fingerprint");
